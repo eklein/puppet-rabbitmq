@@ -1,3 +1,13 @@
-rabbitmq
+= RabbitMQ Puppet module =
 
-This is the rabbitmq module.
+== Usage ==
+
+To simply install and run the RabbitMQ server:
+include rabbitmq
+
+There is a special class, rabbitmq::mcollective, that install the server and the necessary plugins for mcollective:
+include rabbitmq::mcollective
+
+== Requires ==
+- Depends on yum module (Redhat or CentOS), available here:
+  https://github.com/vurbia/puppet-yum
