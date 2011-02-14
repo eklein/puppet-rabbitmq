@@ -2,10 +2,34 @@
 #
 #
 class rabbitmq::config {
-	File {
-		require => Class["rabbitmq::install::${rabbitmq::install_class}"],
-		notify  => Class["rabbitmq::service"],
+	file { $rabbitmq::params::configdir:
+		ensure => directory,
+		owner  => root,
+		group  => root,
+		mode   => 755
+	}
+	
+	# Setup concat module
+	include concat::setup
+	
+	# Setup node config file for concat module and include first and last fragments
+	concat { "${rabbitmq::params::configdir}/rabbitmq.config":
 		owner   => root,
-		group   => root
+		group   => root,
+		mode    => 644,
+		require => Class["rabbitmq::install"], 
+		notify  => Class["rabbitmq::service"]
+	}
+	
+	concat::fragment { "rabbitmq.config-start":
+		target  => "${rabbitmq::params::configdir}/rabbitmq.config",
+		order   => 10,
+		content => template("rabbitmq/rabbitmq.config.start.erb")
+	}
+	
+	concat::fragment { "rabbitmq.config-end":
+		target  => "${rabbitmq::params::configdir}/rabbitmq.config",
+		order   => 90,
+		content => template("rabbitmq/rabbitmq.config.end.erb")
 	}
 }

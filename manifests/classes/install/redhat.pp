@@ -3,10 +3,10 @@
 #
 class rabbitmq::install::redhat {
 	# Fetch the updated RPM from rabbitmq.com
-	common::archive::download { "rabbitmq-server-${rabbitmq_version}-1.noarch.rpm":
+	common::archive::download { "rabbitmq-server-${rabbitmq::params::version}-1.noarch.rpm":
 		ensure     => present,
 		checksum   => false,
-		url        => "http://www.rabbitmq.com/releases/rabbitmq-server/v${rabbitmq_version}/rabbitmq-server-${rabbitmq_version}-1.noarch.rpm"
+		url        => "http://www.rabbitmq.com/releases/rabbitmq-server/v${rabbitmq::params::version}/rabbitmq-server-${rabbitmq::params::version}-1.noarch.rpm"
 	}
 	
 	# Fetch the GPG key only if we don't have it
@@ -26,8 +26,8 @@ class rabbitmq::install::redhat {
 	
 	# Tell yum to install the downloaded file
 	yum::localinstall { "rabbitmq-server":
-		file     => "/usr/src/rabbitmq-server-${rabbitmq_version}-1.noarch.rpm",
+		file     => "/usr/src/rabbitmq-server-${rabbitmq::params::version}-1.noarch.rpm",
 		provides => "rabbitmq-server",
-		require  => [ Common::Archive::Download["rabbitmq-server-${rabbitmq_version}-1.noarch.rpm"], Exec["import-rabbitmq-gpg-key"] ]
+		require  => [ Common::Archive::Download["rabbitmq-server-${rabbitmq::params::version}-1.noarch.rpm"], Exec["import-rabbitmq-gpg-key"] ]
 	}
 }

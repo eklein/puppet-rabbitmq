@@ -2,7 +2,10 @@
 #
 #
 class rabbitmq::install::debian {
+	include apt::repo::rabbitmq::main
+	
 	package { "rabbitmq-server":
-		ensure  => latest
+		ensure  => latest,
+		require => Class["apt::repo::rabbitmq::main"]
 	}
 }
