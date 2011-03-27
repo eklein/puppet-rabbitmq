@@ -1,8 +1,3 @@
-import "classes/*.pp"
-import "classes/install/*.pp"
-import "classes/plugins/*.pp"
-import "definitions/*.pp"
-
 # Class: rabbitmq
 #
 #

@@ -3,7 +3,7 @@
 #
 class rabbitmq::params {
 	$version = $rabbitmq_version ? {
-		"" => "2.3.1",
+		"" => "2.4.0",
 		default => $rabbitmq_version
 	}
 	
