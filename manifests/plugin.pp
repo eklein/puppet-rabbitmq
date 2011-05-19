@@ -5,21 +5,26 @@
 # $version="2.2.0"
 # $target="/usr/lib/rabbitmq/lib/rabbitmq_server-version/plugins"
 #
-define rabbitmq::plugin ($ensure=present, $url="www.rabbitmq.com/releases/plugins", $target=$rabbitmq::params::plugindir, $config=false, $config_order="20") {
+define rabbitmq::plugin ($ensure       = present,
+												 $url          = 'www.rabbitmq.com/releases/plugins',
+												 $target       = $rabbitmq::params::plugindir,
+												 $config       = false,
+												 $config_order = '20') {
+
 	common::archive::download { "${name}.ez":
 		ensure     => $ensure,
 		checksum   => false,
 		url        => "http://${url}/v${rabbitmq::params::version}/${name}-${rabbitmq::params::version}.ez",
 		src_target => $target,
-		notify     => Class["rabbitmq::service"],
-		require    => Class["rabbitmq::config"]
+		notify     => Class['rabbitmq::service'],
+		require    => Class['rabbitmq::config'],
 	}
 	
 	if $config {
 		concat::fragment { "rabbitmq.config-${name}":
 			target  => "${rabbitmq::params::configdir}/rabbitmq.config",
 			order   => $config_order,
-			content => template("rabbitmq/plugins/rabbitmq.config.${name}.erb")
+			content => template("rabbitmq/plugins/rabbitmq.config.${name}.erb"),
 		}
 	}
 }

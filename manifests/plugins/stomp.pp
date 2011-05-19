@@ -2,8 +2,8 @@
 #
 #
 class rabbitmq::plugins::stomp {
-	rabbitmq::plugin { "rabbit_stomp":
+	rabbitmq::plugin { 'rabbit_stomp':
 		ensure => present,
-		config => true
+		config => true,
 	}
 }

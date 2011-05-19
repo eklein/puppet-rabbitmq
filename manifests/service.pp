@@ -2,10 +2,10 @@
 #
 #
 class rabbitmq::service {
-	service { "rabbitmq-server":
+	service { 'rabbitmq-server':
 		ensure    => running,
 		enable    => true,
 		hasstatus => true,
-		require   => Class["rabbitmq::config"]
+		require   => Class['rabbitmq::config'],
 	}
 }
