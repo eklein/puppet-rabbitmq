@@ -3,6 +3,8 @@
 #
 class rabbitmq::install {
 
+      include rabbitmq::install::hosts 
+
 	case $operatingsystem {
 		/(?i)(Debian|Ubuntu)/: {
 			include rabbitmq::install::debian

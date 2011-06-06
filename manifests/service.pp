@@ -8,6 +8,6 @@ class rabbitmq::service {
 		ensure    => running,
 		enable    => true,
 		hasstatus => true,
-		require   =>[Yum::Localinstall["rabbitmq-server"], Class["rabbitmq::config"]]
+		require   =>[Yum::Localinstall["rabbitmq-server"], Class["rabbitmq::config"],Class["rabbitmq::install::hosts"]]
 	}
 }
