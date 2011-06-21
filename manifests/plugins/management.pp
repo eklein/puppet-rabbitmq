@@ -1,5 +1,6 @@
 class rabbitmq::plugins::management{
     rabbitmq::plugin { "management":
-	  ensure => present
+	  ensure => present, 
+	  suffix => "rabbitmq_management-2.5.0.ez"
     }
 }
