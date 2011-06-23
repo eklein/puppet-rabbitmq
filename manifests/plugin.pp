@@ -18,7 +18,7 @@ define rabbitmq::plugin ($ensure=present, $url="www.rabbitmq.com/releases/plugin
 		url        => "http://${url}/v${rabbitmq::params::version}/$remote_file",
 		src_target => $target,
 		notify     => Class["rabbitmq::service"],
-		require    => Class["rabbitmq::config"]
+		require    => [Class["rabbitmq::config"],Yum::Localinstall["rabbitmq-server"]]
 	}
 	
 	if $config {

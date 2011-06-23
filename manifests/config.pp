@@ -18,7 +18,6 @@ class rabbitmq::config {
 		group   => root,
 		mode    => 644,
 		require => Class["rabbitmq::install"], 
-		# notify  => Class["rabbitmq::service"]
 	}
 	
 	concat::fragment { "rabbitmq.config-start":
