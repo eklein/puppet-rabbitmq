@@ -3,8 +3,8 @@
 #
 class rabbitmq::params {
 	$version = $rabbitmq_version ? {
-		'' => '2.4.0',
-		default => $rabbitmq_version,
+		''      => '2.5.0',
+		default => $rabbitmq_version
 	}
 	
 	$configdir = $rabbitmq_configdir ? {

@@ -2,22 +2,26 @@
 # Parameters:
 # $ensure=present
 # $url="www.rabbitmq.com/releases/plugins"
-# $version="2.2.0"
 # $target="/usr/lib/rabbitmq/lib/rabbitmq_server-version/plugins"
 #
 define rabbitmq::plugin ($ensure       = present,
 												 $url          = 'www.rabbitmq.com/releases/plugins',
 												 $target       = $rabbitmq::params::plugindir,
 												 $config       = false,
-												 $config_order = '20') {
+												 $config_order = '20',
+												 $filename     = '') {
+	$remote_file = $filename ? {
+		''      => "${name}-${rabbitmq::params::version}.ez",
+		default => $filename,
+	}
 
 	common::archive::download { "${name}.ez":
 		ensure     => $ensure,
 		checksum   => false,
-		url        => "http://${url}/v${rabbitmq::params::version}/${name}-${rabbitmq::params::version}.ez",
+		url        => "http://${url}/v${rabbitmq::params::version}/$remote_file",
 		src_target => $target,
 		notify     => Class['rabbitmq::service'],
-		require    => Class['rabbitmq::config'],
+		require    => Class['rabbitmq::config']
 	}
 	
 	if $config {

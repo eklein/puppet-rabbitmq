@@ -7,6 +7,7 @@ class rabbitmq::install {
 			include rabbitmq::install::debian
 		}
 		/(?i)(Redhat|CentOS)/: {
+			include yum::repo::epel::main
 			include rabbitmq::install::redhat
 		}
 		default: {

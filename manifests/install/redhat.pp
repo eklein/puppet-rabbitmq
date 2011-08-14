@@ -28,6 +28,6 @@ class rabbitmq::install::redhat {
 	yum::localinstall { 'rabbitmq-server':
 		file     => "/usr/src/rabbitmq-server-${rabbitmq::params::version}-1.noarch.rpm",
 		provides => 'rabbitmq-server',
-		require  => [ Common::Archive::Download["rabbitmq-server-${rabbitmq::params::version}-1.noarch.rpm"], Exec['import-rabbitmq-gpg-key'] ],
+		require  => [ Common::Archive::Download["rabbitmq-server-${rabbitmq::params::version}-1.noarch.rpm"], Exec['import-rabbitmq-gpg-key'], Class['yum::repo::epel::main'] ],
 	}
 }
