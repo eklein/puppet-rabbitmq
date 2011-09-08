@@ -27,7 +27,12 @@ class rabbitmq::install::redhat {
 	# Tell yum to install the downloaded file
 	yum::localinstall { 'rabbitmq-server':
 		file     => "/usr/src/rabbitmq-server-${rabbitmq::params::version}-1.noarch.rpm",
+<<<<<<< HEAD
 		provides => 'rabbitmq-server',
 		require  => [ Common::Archive::Download["rabbitmq-server-${rabbitmq::params::version}-1.noarch.rpm"], Exec['import-rabbitmq-gpg-key'], Class['yum::repo::epel::main'] ],
+=======
+		provides => "rabbitmq-server",
+		require  => [ Common::Archive::Download["rabbitmq-server-${rabbitmq::params::version}-1.noarch.rpm"], Exec["import-rabbitmq-gpg-key"],Class["epel"] ]
+>>>>>>> patching init file to include pid file creation
 	}
 }
