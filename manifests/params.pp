@@ -3,7 +3,7 @@
 #
 class rabbitmq::params {
 	$version = $rabbitmq_version ? {
-		''      => '2.5.0',
+		''      => '2.5.1',
 		default => $rabbitmq_version
 	}
 	
@@ -25,7 +25,7 @@ class rabbitmq::params {
 	}
 	
 	$stomp_ipv4_port = $rabbitmq_stomp_ipv4_port ? {
-		''      => '61613',
+		''      => '6163',
 		default => $rabbitmq_stomp_ipv4_port,
 	}
 	
@@ -35,7 +35,7 @@ class rabbitmq::params {
 	}
 	
 	$stomp_ipv6_port = $rabbitmq_stomp_ipv6_port ? {
-		''      => '61613',
+		''      => '6163',
 		default => $rabbitmq_stomp_ipv6_port,
 	}
 }
